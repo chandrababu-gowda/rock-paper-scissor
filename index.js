@@ -1,10 +1,13 @@
 let selected = document.querySelectorAll('.selection');
 let generatedText = document.querySelector('.computer-generated');
-let selectedText = document.querySelector('.user-selection-display')
+let selectedText = document.querySelector('.user-selection-display');
+let display = document.querySelector('#score-display');
+let total = 0;
 
 selected.forEach(ele => {
     ele.addEventListener('click',()=>{
-        selectedText.innerHTML = `<h1>${ele.innerText}</h1>`
+        let user = ele.innerText ;
+        selectedText.innerHTML = `<h1>${user}</h1>`
         let generatedNum = Math.floor(Math.random()*3)+1;
         switch (generatedNum) {
             case 1:
@@ -20,7 +23,29 @@ selected.forEach(ele => {
                 generatedText.innerHTML = `<h1>Error</h1>`;
                 break;
         }
-        // console.log(generatedNum);
+        let generate = generatedText.innerText;
+        // let total = 0;
+        if (user == generate) {
+            total = total
+            display.innerHTML = `<h1>Draw</h1><p>Score - ${total}</p>`;
+        } else {
+            if (user == 'Rock' && generate == 'Scissor') {
+                total = total + 1;
+                display.innerHTML = `<h1>You Won</h1><p>Score - ${total}</p>`;
+            }
+            else if (user == 'Paper' && generate == 'Rock') {
+                total = total + 1;
+                display.innerHTML = `<h1>You Won</h1><p>Score - ${total}</p>`;
+            } 
+            else if (user == 'Scissor' && generate == 'Paper') {
+                total = total + 1;
+                display.innerHTML = `<h1>You Won</h1><p>Score - ${total}</p>`;
+            } else {
+                total = total;
+                display.innerHTML = `<h1>You Lost</h1><p>Score - ${total}</p>`;
+            }
+        }
+
     })
 });
 
